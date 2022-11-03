@@ -1,5 +1,5 @@
 from PIL import Image
-
+from datetime import datetime
 import os
 
 
@@ -17,6 +17,7 @@ class AddData:
             self.add_genre()
             self.add_description()
             self.add_img()
+            self.add_editing_time()
 
     def add_title(self):
         title = open(f'files/{self.name_file}/title.txt', mode='w')
@@ -44,3 +45,10 @@ class AddData:
             img = Image.open(self.img)
             img = img.resize((371, 497))
             img.save(f'files/{self.name_file}/img.png')
+
+    def add_editing_time(self):
+        editing_time = open(f'files/{self.name_file}/editing_time.txt', mode='w')
+        editing_time.close()
+        editing_time = open(f'files/{self.name_file}/editing_time.txt', mode='a')
+        editing_time.write(str(datetime.now()))
+        editing_time.close()
