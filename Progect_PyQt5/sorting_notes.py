@@ -23,11 +23,19 @@ class SortingName:
     def sort():
         file = open('files/name_files.txt', 'rt')
         names_files = file.readlines()
-        names_files = [int(i[:-1]) for i in names_files]
         file.close()
+        list_title = {}
+        for i in names_files:
+            name = i[:-1]
+            file = open(f'files/{name}/title.txt')
+            title = file.readline()
+            file.close()
+            list_title[name] = title
+        list_title = sorted(list_title, key=list_title.get)
         file = open('files/name_files.txt', mode='w')
         file.close()
         file = open('files/name_files.txt', mode='a')
-        for i in sorted(names_files):
-            file.write(str(i) + '\n')
+        for i in list_title:
+            file.write(f'{i}\n')
         file.close()
+
